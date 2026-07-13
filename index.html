@@ -33,16 +33,26 @@
             font-size: 16px; font-weight: 500; text-decoration: none; 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        /* Optimized faster animations using will-change */
-        .btn-projects { will-change: transform; animation: fL 4s infinite ease-in-out; box-shadow: 5px 12px 20px rgba(0,0,0,0.6); }
-        .btn-idea { will-change: transform; animation: fR 4.5s infinite ease-in-out; box-shadow: -5px 14px 22px rgba(0,0,0,0.6); }
+        
+        /* High visibility, higher speed, and larger rotation/translation adjustments */
+        .btn-projects { 
+            will-change: transform; 
+            animation: fL 2s infinite ease-in-out; 
+            box-shadow: 5px 12px 20px rgba(0,0,0,0.6); 
+        }
+        .btn-idea { 
+            will-change: transform; 
+            animation: fR 2.2s infinite ease-in-out; 
+            box-shadow: -5px 14px 22px rgba(0,0,0,0.6); 
+        }
+        
         @keyframes fL {
-            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
-            50% { transform: translateY(-6px) rotate(0.8deg); box-shadow: 8px 18px 28px rgba(0,0,0,0.7), 0 0 15px rgba(168,85,247,0.2); }
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-15px) rotate(2.5deg); box-shadow: 12px 25px 35px rgba(0,0,0,0.7), 0 0 20px rgba(168, 85, 247, 0.3); }
         }
         @keyframes fR {
-            0%, 100% { transform: translateY(0) rotate(0.6deg); }
-            50% { transform: translateY(-7px) rotate(-0.7deg); box-shadow: -8px 20px 30px rgba(0,0,0,0.7), 0 0 15px rgba(168,85,247,0.2); }
+            0%, 100% { transform: translateY(0) rotate(2.5deg); }
+            50% { transform: translateY(-16px) rotate(-2deg); box-shadow: -12px 28px 38px rgba(0,0,0,0.7), 0 0 20px rgba(168, 85, 247, 0.3); }
         }
     </style>
 </head>
