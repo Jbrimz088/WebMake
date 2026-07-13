@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Form UI</title>
+    <title>Home</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,53 +13,108 @@
 
         body {
             background-color: #000000;
+            color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        .form-container {
+        .container {
             width: 100%;
-            max-width: 740px;
-            background: #121212;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-            border: 1px solid #222;
-        }
-
-        iframe {
-            width: 100%;
-            height: 80vh;
-            border: none;
-            display: block;
-        }
-
-        .loading {
-            color: #888;
+            max-width: 600px;
             text-align: center;
-            font-size: 14px;
-            position: absolute;
-            z-index: -1;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #121212;
+            color: #ffffff;
+            border: 1px solid #222;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn:hover {
+            background: #1a1a1a;
+            border-color: #444;
+        }
+
+        /* Dropdown list for projects */
+        .project-list {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 15px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+        }
+
+        .project-link {
+            color: #888;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: left;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .project-link:hover {
+            color: #fff;
+            background: #121212;
         }
     </style>
 </head>
 <body>
 
-    <div class="loading">Loading Form...</div>
+    <div class="container">
+        <h1>Dashboard</h1>
+        
+        <div class="button-group">
+            <button class="btn" onclick="toggleProjects()">View Projects List</button>
+            
+            <div id="projectList" class="project-list">
+                <a class="project-link" href="Projects/form_container.html">Project 1 (Google Form)</a>
+                <a class="project-link" href="Projects/project2.html">Project 2 Label</a>
+                <a class="project-link" href="Projects/project3.html">Project 3 Label</a>
+            </div>
 
-    <div class="form-container">
-        <iframe 
-            src="https://docs.google.com/forms/d/e/1FAIpQLSeqUQp9hNJtKa9qlW8iYnxZrskzxdABsr8SEyIN6LG8WqwDOw/viewform?embedded=true" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0">
-            Loading…
-        </iframe>
+            <a href="idea.html" class="btn">Go to Idea Page</a>
+        </div>
     </div>
 
+    <script>
+        function toggleProjects() {
+            const list = document.getElementById('projectList');
+            if (list.style.display === 'flex') {
+                list.style.display = 'none';
+            } else {
+                list.style.display = 'flex';
+            }
+        }
+    </script>
 </body>
 </html>
