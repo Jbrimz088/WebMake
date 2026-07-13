@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects List</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000000; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 600px; }
+        h1 { margin-bottom: 20px; font-weight: 600; text-align: center; }
+        .back-btn { display: inline-block; margin-bottom: 30px; color: #007aff; text-decoration: none; font-size: 14px; }
+        .project-grid { display: flex; flex-direction: column; gap: 12px; }
+        .project-link { display: block; padding: 16px; background: #121212; border: 1px solid #222; border-radius: 8px; color: #ffffff; text-decoration: none; text-transform: capitalize; transition: background 0.2s, border-color 0.2s; }
+        .project-link:hover { background: #1a1a1a; border-color: #444; }
+        .status { color: #888; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">&larr; Back to Dashboard</a>
+        <h1>All Projects</h1>
+        <div id="projectGrid" class="project-grid">
+            <div class="status" id="statusMessage">Loading projects from GitHub...</div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            // Configuration using your GitHub details
+            const USER = "jbrimz088";
+            const REPO = "Jmusic"; 
+            const FOLDER = "Projects"; 
+
+            const projectGrid = document.getElementById("projectGrid");
+            const statusMessage = document.getElementById("statusMessage");
+
+            const API_URL = `https://api.github.com/repos/${USER}/${REPO}/contents/${FOLDER}`;
+
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to load directory contents");
+                    return response.json();
+                })
+                .then(files => {
+                    // Filter down to just the .html pages
+                    const htmlFiles = files.filter(f => f.name.toLowerCase().endsWith(".html"));
+
+                    if (htmlFiles.length === 0) {
+                        statusMessage.textContent = "No .html files found in the Projects folder.";
+                        return;
+                    }
+
+                    // Remove the loading message
+                    statusMessage.remove();
+
+                    // Generate list items dynamically
+                    htmlFiles.forEach(file => {
+                        const a = document.createElement("a");
+                        // Use your structural path for standard Pages routing
+                        a.href = `${FOLDER}/${file.name}`; 
+                        a.className = "project-link";
+                        
+                        // Formats the label cleanly: "my_file.html" -> "my file"
+                        a.textContent = file.name.replace(".html", "").replace(/[-_]/g, " ");
+                        
+                        projectGrid.appendChild(a);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    statusMessage.textContent = "Error loading files. Ensure the 'Projects' folder exists in your main repository branch.";
+                });
+        });
+    </script>
+</body>
+</html>
